@@ -2,6 +2,9 @@ import 'dart:ffi';
 
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'src/likes.dart';
+import 'src/home.dart';
+
 
 /// This sample app shows an app with two screens.
 ///
@@ -55,7 +58,7 @@ final GoRouter _router = GoRouter(
         GoRoute(
             path: '/likes',
             pageBuilder: (BuildContext context, GoRouterState state) {
-              return CustomSlideTransition(child: DetailsScreen());
+              return CustomSlideTransition(child: const LikesScreen());
             }),
       ],
     ),
@@ -92,7 +95,6 @@ class _ScaffoldWithBottomNavBarState extends State<ScaffoldWithNavBar> {
           onTap: (index) => {
                 index == 1 ? context.go('/likes') : context.go('/home'),
                 GoRouter.of(context).location == '/likes' ? currIndex = 1 : currIndex = 0,
-                print(GoRouter.of(context).location)
                 }),
     );
   }
@@ -107,54 +109,6 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp.router(
       routerConfig: _router,
-    );
-  }
-}
-
-/// The home screen
-class HomeScreen extends StatelessWidget {
-  /// Constructs a [HomeScreen]
-  const HomeScreen({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      // appBar: AppBar(title: const Text('Home Screen')),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            ElevatedButton(
-              onPressed: () => context.go('/details'),
-              child: const Text('Go to the Details screen'),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-/// The details screen
-class DetailsScreen extends StatelessWidget {
-  /// Constructs a [DetailsScreen]
-  const DetailsScreen({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      // appBar: AppBar(title: const Text('Details Screen')),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <ElevatedButton>[
-            ElevatedButton(
-              onPressed: () => context.go('/'),
-              child: const Text('Go back to the Home screen'),
-            ),
-          ],
-        ),
-      ),
     );
   }
 }

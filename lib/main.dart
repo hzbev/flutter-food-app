@@ -53,7 +53,7 @@ final GoRouter _router = GoRouter(
         GoRoute(
             path: '/home',
             pageBuilder: (BuildContext context, GoRouterState state) {
-              return CustomSlideTransition(child: HomeScreen());
+              return CustomSlideTransition(child: const HomeScreen());
             }),
         GoRoute(
             path: '/likes',
@@ -88,7 +88,7 @@ class _ScaffoldWithBottomNavBarState extends State<ScaffoldWithNavBar> {
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.favorite),
-              label: 'Business',
+              label: 'Likes',
             ),
           ],
           currentIndex: currIndex,

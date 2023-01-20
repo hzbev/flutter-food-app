@@ -41,6 +41,7 @@ dependencies:
   localstore: ^1.3.4
   go_router: ^6.0.1
   shared_preferences: ^2.0.16
+  http: ^0.13.5
 
 dev_dependencies:
   flutter_test:

@@ -15,7 +15,7 @@ class LikesScreen extends StatefulWidget {
 class _LikesScreenState extends State<LikesScreen> {
   final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
   late Future<int> _counter;
-  late Future<RecipeDataHome> recipeData;
+  late Future<List> recipeData;
 
   Future<void> _incrementCounter() async {
     final SharedPreferences prefs = await _prefs;
@@ -42,12 +42,12 @@ class _LikesScreenState extends State<LikesScreen> {
     return Scaffold(
       // appBar: AppBar(title: const Text('Details Screen')),
       body: Center(
-          child: FutureBuilder<RecipeDataHome>(
+          child: FutureBuilder<List<dynamic>>(
         future: recipeData,
         builder: (context, snapshot) {
           if (snapshot.hasData) {
-            print(snapshot.data);
-            return Text(snapshot.data!.name);
+            print(snapshot.data?[0]['name']);
+            return Text(snapshot.data?[0]['name']);
           } else if (snapshot.hasError) {
             return Text('${snapshot.error}');
           }

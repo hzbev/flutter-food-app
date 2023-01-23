@@ -10,7 +10,7 @@ class RecipeDataHome {
   final List<String>? ingredients;
   final bool? spicy;
   final bool? vegetarian;
-  final int? price;
+  final double? price;
   final String? image;
 
   RecipeDataHome({
@@ -38,20 +38,27 @@ RecipeDataHome _locationFromJson(Map<String, dynamic> json) {
       ingredients: (json['ingredients'] as List?)?.map((dynamic e) => e as String).toList(),
       spicy: json['spicy'] as bool?,
       vegetarian: json['vegetarian'] as bool?,
-      price: json['price'] as int?,
+      price: json['price'] as double?,
       image: json['image'] as String?
   );
 }
 
-Future<RecipeDataHome> fetchAlbum() async {
+Future<List> fetchAlbum() async {
   final response = await http
-      .get(Uri.parse('https://jsonplaceholder.typicode.com/albums/1'));
+      .get(Uri.parse('http://192.168.1.20:3000/pizza/'));
 
   if (response.statusCode == 200) {
-    print(RecipeDataHome.fromJson(jsonDecode(response.body)));
+
+List<dynamic> list = jsonDecode(response.body);
+// RecipeDataHome receivedData = RecipeDataHome.fromJson(list[1]);
+print(list[0]['price']);
+
+
+    // print(response.body);
+    // print(RecipeDataHome.fromJson(jsonDecode(response.body)));
     // If the server did return a 200 OK response,
     // then parse the JSON.
-    return RecipeDataHome.fromJson(jsonDecode(response.body));
+    return list;
   } else {
     // If the server did not return a 200 OK response,
     // then throw an exception.

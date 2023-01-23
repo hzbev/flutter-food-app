@@ -47,7 +47,25 @@ class _LikesScreenState extends State<LikesScreen> {
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             print(snapshot.data?[0]['name']);
-            return Text(snapshot.data?[0]['name']);
+            print(snapshot.data?[1]["price"]?.toString()??'0.0');
+            // return Text(snapshot.data?[0]['name']);
+            return ListView.builder(
+                padding: const EdgeInsets.all(8),
+                itemCount: snapshot.data?.length ?? 0,
+                itemBuilder: (BuildContext context, int index) {
+                  return Container(
+                    height: 100,
+                    // color: Colors.amber[colorCodes[index]],
+                    child: Center(
+                        child: Column(
+                      children: <Widget>[
+                        Text(snapshot.data?[index]["name"]),
+                        Text('${snapshot.data?[index]["price"]?.toString()??"0.0"}\$'),
+
+                      ],
+                    )),
+                  );
+                });
           } else if (snapshot.hasError) {
             return Text('${snapshot.error}');
           }
@@ -56,10 +74,10 @@ class _LikesScreenState extends State<LikesScreen> {
           return const CircularProgressIndicator();
         },
       )),
-      floatingActionButton: FloatingActionButton(
-          onPressed: _incrementCounter,
-          tooltip: 'Increment',
-          child: const Icon(Icons.add)),
+      // floatingActionButton: FloatingActionButton(
+      //     onPressed: _incrementCounter,
+      //     tooltip: 'Increment',
+      //     child: const Icon(Icons.add)),
     );
   }
 }

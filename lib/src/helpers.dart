@@ -51,7 +51,6 @@ Future<List> fetchAlbum() async {
 
 List<dynamic> list = jsonDecode(response.body);
 // RecipeDataHome receivedData = RecipeDataHome.fromJson(list[1]);
-print(list[0]['price']);
 
 
     // print(response.body);
